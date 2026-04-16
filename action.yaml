@@ -1,0 +1,38 @@
+name: Post Trivy Results as PR Comment
+description: Reads a Trivy JSON results file and posts vulnerabilities as a PR comment
+
+inputs:
+  results-file:
+    description: Path to the Trivy JSON output file
+    required: false
+    default: trivy-results.json
+  full-summary:
+    description: When true, includes a summary table of all scanned targets (including those with 0 vulnerabilities)
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          const { formatResults } = require(path.join(process.env.GITHUB_ACTION_PATH, 'src/format.js'));
+
+          const fullSummary = '${{ inputs.full-summary }}' === 'true';
+          let body;
+          try {
+            const raw = fs.readFileSync('${{ inputs.results-file }}', 'utf8');
+            const data = JSON.parse(raw);
+            body = formatResults(data, fullSummary);
+          } catch (e) {
+            body = `## Trivy Scan Results\n\nError reading results: ${e.message}`;
+          }
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body,
+          });
