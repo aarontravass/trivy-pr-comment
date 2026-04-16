@@ -13,9 +13,6 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     steps:
-      - uses: twingate/github-action@v1
-        with:
-          service-key: ${{ fromJson(secrets.TWINGATE_SERVICE_KEY) }}
 
       - uses: actions/checkout@v4
 

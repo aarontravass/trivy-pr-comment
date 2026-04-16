@@ -13,10 +13,6 @@ jobs:
     name: Create tag
     runs-on: ubuntu-latest
     steps:
-      - uses: twingate/github-action@v1
-        with:
-          service-key: ${{ fromJson(secrets.TWINGATE_SERVICE_KEY) }}
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0

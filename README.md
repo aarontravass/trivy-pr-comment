@@ -19,7 +19,7 @@ By default only targets with vulnerabilities are shown. An optional full summary
 
 - name: Post Trivy results as PR comment
   if: always()
-  uses: ml01-sdlc/trivy-pr-comment@v1
+  uses: aarontravass/trivy-pr-comment@v1
 ```
 
 ## Inputs
@@ -34,13 +34,13 @@ By default only targets with vulnerabilities are shown. An optional full summary
 ### Vulnerabilities only (default)
 
 ```yaml
-- uses: ml01-sdlc/trivy-pr-comment@v1
+- uses: aarontravass/trivy-pr-comment@v1
 ```
 
 ### With full summary
 
 ```yaml
-- uses: ml01-sdlc/trivy-pr-comment@v1
+- uses: aarontravass/trivy-pr-comment@v1
   with:
     full-summary: "true"
 ```
@@ -48,7 +48,7 @@ By default only targets with vulnerabilities are shown. An optional full summary
 ### Custom results file path
 
 ```yaml
-- uses: ml01-sdlc/trivy-pr-comment@v1
+- uses: aarontravass/trivy-pr-comment@v1
   with:
     results-file: path/to/trivy-results.json
 ```
