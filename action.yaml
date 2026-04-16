@@ -1,5 +1,8 @@
 name: Post Trivy Results as PR Comment
 description: Reads a Trivy JSON results file and posts vulnerabilities as a PR comment
+branding:
+  icon: file-text
+  color: blue
 
 inputs:
   results-file:
